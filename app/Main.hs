@@ -35,7 +35,7 @@ main = do
         _ -> error "nearby takes 0 or 1 arguments"
 
   let files = filesBFS dir
-  files |> S.mapM_ (toAbs >=> toFilePath .> Char8.unpack .> putStrLn)
+  files |> S.mapM_ (toFilePath .> Char8.unpack .> putStrLn)
 
 fromChan :: (IsStream t, MonadAsync m) => TChan a -> t m a
 fromChan = S.repeatM . liftIO . atomically . readTChan
